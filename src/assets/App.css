@@ -12,7 +12,8 @@ section{
 .row{
   border: 1px dotted green;
   margin: 5px;
-  padding: 5px;
+  padding: 10px;
+  min-height: 100px;
   display: grid;
   /* grid-template-columns:  33.333% 33.333% 33.333%; */
 }

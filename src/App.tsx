@@ -2,9 +2,15 @@ import React from 'react';
 import './assets/App.css';
 import Page from './components/Page/Page';
 import Row from './components/Row/Row';
-import Column from './components/Column/Column';
-import styled from 'styled-components';
 
+import styled from 'styled-components';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+
+} from "react-router-dom";
+import RowSetting from './components/SettingsView/RowSetting/RowSetting';
 
 const StyledAside = styled.aside`
   position: absolute;
@@ -63,31 +69,40 @@ class App extends React.Component<any, any> {
    componentDidMount(){
    }
 
-   renderTemplate(){
-    const template = this.state.template;
-    const row = template.rows.map((row, index) => <Row key={row.id}>{template.rows[index].col.map(col => (<Column key={col.id} />))}</Row>)
-    return row
-   }
+  //  renderTemplate(){
+  //   const template = this.state.template;
+  //   const row = template.rows.map((row, index) => <Row key={row.id}>{template.rows[index].col.map(col => (<Column key={col.id} />))}</Row>)
+  //   return row
+  //  }
 
-   createRow(id){
-     const template = this.state.template;
-     const newTemplate = {
+  //  createRow(id){
+  //    const template = this.state.template;
+  //    const newTemplate = {
       
-     }
-   }
+  //    }
+  //  }
 
   render() {
     return (
-      <>
+      <Router>
           <StyledAside>
-
+          <Switch>
+            <Route exact path="/rowsettings/:id" component={RowSetting}/>
+      
+          </Switch>
           </StyledAside>
           <AppWraper className="App">
               <Page id="page_1">
-                {this.renderTemplate()}
+                {/* {this.renderTemplate()} */}
+                <Row id={0} type='row' >
+                  
+                </Row>
+                <Row id={1} type='row' >
+                  
+                </Row>
               </Page>
           </AppWraper>
-      </>)
+      </Router>)
   }
 }
 
