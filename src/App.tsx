@@ -11,6 +11,9 @@ import {
 
 } from "react-router-dom";
 import RowSetting from './components/SettingsView/RowSetting/RowSetting';
+import PageSettings from './components/SettingsView/PageSetting/PageSetting';
+import ColumnSettings from './components/SettingsView/ColumnSetting/ColumnSetting';
+import TitleSettings from './components/SettingsView/TitleSetting/TitleSetting';
 
 const StyledAside = styled.aside`
   position: absolute;
@@ -87,19 +90,18 @@ class App extends React.Component<any, any> {
       <Router>
           <StyledAside>
           <Switch>
+          <Route exact path="/titlesettings/:id" component={TitleSettings}/>
+            <Route exact path="/columnsettings/:id" component={ColumnSettings}/>
             <Route exact path="/rowsettings/:id" component={RowSetting}/>
-      
+            <Route exact path="/pagesettings/:id" component={PageSettings}/>
           </Switch>
           </StyledAside>
           <AppWraper className="App">
-              <Page id="page_1">
+              <Page id={1} type="page">
                 {/* {this.renderTemplate()} */}
-                <Row id={0} type='row' >
+               
                   
-                </Row>
-                <Row id={1} type='row' >
-                  
-                </Row>
+              
               </Page>
           </AppWraper>
       </Router>)

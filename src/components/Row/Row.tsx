@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Column from '../Column/Column';
-import { Link } from "react-router-dom";
-import { Settings } from '@material-ui/icons';
+import SettingsLinks from '../SettingsLinks/SettingsLinks';
 
 const RowWrapper = styled.div`
     grid-template-columns: ${({childrenLength}) => ((typeof childrenLength === "object" ? countWidth(childrenLength) : 0))};
-`
-
-const RowSetting = styled.aside`
-    position: absolute;
+    &:hover>aside{
+        opacity: 1;
+    }
 `
 
 const countWidth = (children) =>{
@@ -22,46 +20,47 @@ const countWidth = (children) =>{
 
 type IRow = {
     id: number,
-    type: string
+    type: string,
+    removeRow: any
 };
 
 class Row extends React.Component<IRow, any> {
     state = {
         columns: [],
-        redirect: false,
+        nextId: 0,
     }
 
-    addColumn(){
-        const id = this.state.columns.length;
-        const columns: Array<object> = [ ...this.state.columns];
-        const a:any = <Column key={id}/>;
-        columns.push(a);   
-            this.setState({
-                columns
-            })
-    }
-
-
-    handleClickRow(){
-        const columns = this.state.columns;
+    removeColumn(id:number){
+        const columns:any = [ ...this.state.columns];
+        const newColumns = columns.filter(item => item.props.id !== id )
         this.setState({
-            columns,
-            redirect: true,     
+            columns: newColumns,
         })
     }
 
-    render(){
-        const { type, id} = this.props;
+    addColumn(){
+        const id = this.state.nextId;
+        const columns: Array<object> = [ ...this.state.columns];
+        const a:any = <Column key={id} id={id} type="column" removeColumn={this.removeColumn.bind(this)}/>;
+        columns.push(a);   
+            this.setState({
+                columns,
+                nextId: id + 1
+            })
+    }
 
+    render(){
+        const { type, id, removeRow} = this.props;
         return (
             <RowWrapper className="row" childrenLength={this.state.columns} >
-                <RowSetting>
-                   <Link to={{
+                <SettingsLinks id={id} type={type} addColumn={this.addColumn.bind(this)} remove={removeRow}/>
+                {/* <Setting>
+                   <StyledLink to={{
                         pathname: `/${type}settings/${id}`,
                         addColumn: this.addColumn.bind(this)
-                    }}><Settings/></Link> 
-                    
-                </RowSetting>
+                    }}><StyledSettings/></StyledLink> 
+                    <DeleteRowBtn onClick={() => removeRow(id)} >X</DeleteRowBtn>
+                </Setting> */}
                 {this.state.columns}
             </RowWrapper>
         )

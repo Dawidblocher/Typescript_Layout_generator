@@ -1,25 +1,38 @@
 .page {
-  border: 1px dotted red;
+  border: 2px dotted #cccccc;
   padding: 5px;
+  position: relative;
+  margin-top: 10px;
 }
 
 section{
-  border: 1px dotted blue;
+  border: 2px dotted #cccccc;
   margin: 5px;
   padding: 5px;
 }
 
 .row{
-  border: 1px dotted green;
+  border: 2px dotted #cccccc;
   margin: 5px;
   padding: 10px;
   min-height: 100px;
   display: grid;
+  position: relative;
   /* grid-template-columns:  33.333% 33.333% 33.333%; */
 }
 
 .column{
-  border: 1px dotted violet;
-  margin: 5px;
-  padding: 5px;
+  border: 2px dotted #cccccc;
+
+  position: relative;
 }
+.title{
+  border: 2px dotted #cccccc;
+
+  position: relative;
+}
+
+
+/* .row:hover aside{
+  opacity: 1;
+} */

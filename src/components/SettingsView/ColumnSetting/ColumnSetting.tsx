@@ -6,13 +6,13 @@ const Wrapper = styled.div`
     padding: 10px;
 `
 
-const RowSetting = ( props) => {
-    const { location: {addColumn} } = props;
+const ColumnSetting = ( props) => {
+    const { location: {createTitleComponent} } = props;
     return (
         <Wrapper >
-            <SettingButton clickFn={addColumn} title="Add Column" icon="+"/>
+            <SettingButton clickFn={createTitleComponent} title="Create Title" icon="+"/>
         </Wrapper>
     )
 }
 
-export default RowSetting;
+export default ColumnSetting;
