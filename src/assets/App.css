@@ -26,10 +26,22 @@ section{
 
   position: relative;
 }
+
+.column:last-child .width-control{
+  display: none;
+}
+
 .title{
   border: 2px dotted #cccccc;
 
   position: relative;
+}
+.width-control{
+  opacity: 0;
+  transition: .3s;
+}
+.column:hover .width-control{
+  opacity: 1;
 }
 
 

@@ -10,17 +10,31 @@ const RowWrapper = styled.div`
     }
 `
 
+const WidthControl = styled.div`
+    width:15px;
+    background: #dcdcdc;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: col-resize;
+`;
+
 type IRow = {
     id: number,
     type: string,
-    removeColumn: any
+    removeColumn: any,
+    changeWidth: any,
 };
 
 class Column extends React.Component<IRow, any> {
     state = {
+        onMove: false,
         elements: [],
         nextId: 0,
+        width: 100,
     }
+
     removelement(id:number){
         const columns:any = [ ...this.state.elements];
         const newElements = columns.filter(item => item.props.id !== id )
@@ -28,6 +42,7 @@ class Column extends React.Component<IRow, any> {
             columns: newElements,
         })
     }
+
     createTitleComponent = () => {
         const id = this.state.nextId;
         const elements: Array<object> = [ ...this.state.elements];
@@ -37,13 +52,41 @@ class Column extends React.Component<IRow, any> {
             elements,
              nextId: id + 1
         })
-
     }
+
+    changeWidth(value){
+        this.setState({
+            width: this.state.width + value,
+        })
+    }
+    
+    handleMoveMouse(e){
+        if(this.state.onMove)
+            this.props.changeWidth(e.movementX * .3, this.props.id);
+    }
+
+    handleMosueDown = (e) => {
+        
+        this.setState({
+            onMove: true,
+        })
+        
+    }
+
+    handleMouseUp = () => {
+        this.setState({
+            onMove: false,
+        })
+    }
+
 
     render(){
         const { type, id, removeColumn} = this.props;
+        document.addEventListener("mouseup", this.handleMouseUp)
         return (
-            <RowWrapper className="column" >
+            <RowWrapper  className="column" style={{
+                width: this.state.width + "%",
+            }}>
                 <SettingsLinksColumn id={id} type={type} remove={removeColumn} createTitleComponent={this.createTitleComponent}/>
                 {/* <Setting>
                    <StyledLink to={{
@@ -53,6 +96,7 @@ class Column extends React.Component<IRow, any> {
                     <DeleteRowBtn onClick={() => removeRow(id)} >X</DeleteRowBtn>
                 </Setting> */}
                 {this.state.elements}
+                <WidthControl className="width-control" onMouseDown={this.handleMosueDown}  onMouseMove={(e) => this.handleMoveMouse(e)}/>
             </RowWrapper>
         )
     }

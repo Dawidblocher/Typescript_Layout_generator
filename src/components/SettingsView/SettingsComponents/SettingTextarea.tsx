@@ -15,7 +15,6 @@ const TextareaWrapper = styled.div`
 const SettingTextarea = ( props) => {
     const { clickFn, title, icon, text, setValue } = props;
     return (
-
         <TextareaWrapper>
             <p>{title}</p>
             <textarea onChange={clickFn} onClick={setValue}></textarea>

@@ -43,6 +43,7 @@ class Page extends Component<IPage, any> {
 
     render(){
         const { type, id} = this.props;
+        console.log(JSON.stringify(this.state))
         return (
             <StyledPage className="page"
                 id={this.props.id}

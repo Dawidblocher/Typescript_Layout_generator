@@ -95,6 +95,7 @@ class App extends React.Component<any, any> {
             <Route exact path="/rowsettings/:id" component={RowSetting}/>
             <Route exact path="/pagesettings/:id" component={PageSettings}/>
           </Switch>
+          
           </StyledAside>
           <AppWraper className="App">
               <Page id={1} type="page">
@@ -103,6 +104,7 @@ class App extends React.Component<any, any> {
                   
               
               </Page>
+              
           </AppWraper>
       </Router>)
   }

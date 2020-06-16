@@ -35,14 +35,15 @@ const DeleteRowBtn = styled.button`
 `;
 
 
-const SettingsLinks = ( props) => {
-    const { type, id, remove, handleTextInput, title, setValue } = props;
+const SettingsLinksTitle = ( props) => {
+    const { type, id, remove, handleTextInput, title, setValue, handleMarginStyle} = props;
 
     const ColumnSettings = {
         pathname: `/${type}settings/${id}`,
         handleTextInput: handleTextInput,
         title: title,
-        setValue: setValue
+        setValue: setValue,
+        handleMarginStyle: handleMarginStyle
     }
 
     return (
@@ -53,4 +54,4 @@ const SettingsLinks = ( props) => {
     )
 }
 
-export default SettingsLinks;
+export default SettingsLinksTitle;
