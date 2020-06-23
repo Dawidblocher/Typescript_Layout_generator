@@ -36,10 +36,12 @@ const DeleteRowBtn = styled.button`
 
 
 const SettingsLinks = ( props) => {
-    const { addColumn, addRow, type, id, remove } = props;
+    const { addColumn, addRow, type, id, remove, saveTemplate, loadTemplate } = props;
     const RowSettings = {
         pathname: `/${type}settings/${id}`,
-        addRow: addRow
+        addRow: addRow,
+        saveTemplate: saveTemplate,
+        loadTemplate: loadTemplate,
     }
 
     const ColumnSettings = {

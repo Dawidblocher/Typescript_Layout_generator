@@ -7,10 +7,12 @@ const Wrapper = styled.div`
 `
 
 const PageSetting = ( props) => {
-    const { location: {addRow} } = props;
+    const { location: {addRow, saveTemplate, loadTemplate} } = props;
     return (
         <Wrapper >
             <SettingButton clickFn={addRow} title="Add Row" icon="+"/>
+            <button onClick={saveTemplate}>zapisz szablon</button>
+            <button onClick={loadTemplate}>Wczytaj szablon</button>
         </Wrapper>
     )
 }

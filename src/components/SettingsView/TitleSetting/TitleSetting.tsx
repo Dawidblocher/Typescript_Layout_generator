@@ -1,5 +1,4 @@
 import React from 'react';
-import SettingButton from '../SettingsComponents/SettingButton';
 import styled from 'styled-components';
 
 import SettingTextarea from '../SettingsComponents/SettingTextarea';

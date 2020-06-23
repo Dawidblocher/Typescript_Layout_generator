@@ -21,18 +21,24 @@ const countWidth = (widthArray) =>{
 type IRow = {
     id: number,
     type: string,
-    removeRow: any
+    removeRow: any,
+    getRowState: any,
+    columns: any
 };
 
 class Row extends React.Component<IRow, any> {
-    state = {
-        columns: [],
-        nextId: 0,
-        update: false,
-        columnSetting: {
-            width: [],
+    constructor(props){
+        super(props);
+        this.state = {
+            columns: this.props.columns,
+            nextId: 0,
+            update: false,
+            columnSetting: {
+                width: [],
+            }
         }
     }
+    
 
     countWidth = (children) => {
         if(this.state.update){
@@ -62,7 +68,7 @@ class Row extends React.Component<IRow, any> {
         const id = this.state.nextId;
         const columns: Array<object> = [ ...this.state.columns];
         if(columns.length < 4){
-            const a:any = <Column key={id} id={id} type="column" removeColumn={this.removeColumn.bind(this)} changeWidth={this.changeWidth} />;
+            const a:any = <Column key={id} id={id} type="column" removeColumn={this.removeColumn.bind(this)} changeWidth={this.changeWidth} elements={[]}/>;
             columns.push(a);   
                 this.setState({
                     columns,
@@ -76,8 +82,6 @@ class Row extends React.Component<IRow, any> {
     }
 
     changeWidth = (value, id) => {
-        const valueToMinus = this.state.columnSetting.width[id];
-        const valueToAdd = this.state.columnSetting.width[id];
         if(id !== this.state.columns.length-1){
             const width: Array<number> = [...this.state.columnSetting.width]
             width[id] = width[id] + value;
@@ -88,30 +92,16 @@ class Row extends React.Component<IRow, any> {
                 }
             })
         }
-        // if(id === 2){
-        //     const width: Array<number> = [...this.state.columnSetting.width]
-        //     width[2] = width[2] + value;
-        //     width[3] = width[3] - value;
-        //     this.setState({
-        //         columnSetting:{
-        //             width
-        //         }
-        //     })
-        // }
+       
     }
-
+    getValueToSave =() =>{
+        console.log(this.state)
+    }
     render(){
         const { type, id, removeRow} = this.props;
         return (
             <RowWrapper className="row" widthArray={this.state.columnSetting.width} >
-                <SettingsLinks id={id} type={type} addColumn={this.addColumn.bind(this)} remove={removeRow}/>
-                {/* <Setting>
-                   <StyledLink to={{
-                        pathname: `/${type}settings/${id}`,
-                        addColumn: this.addColumn.bind(this)
-                    }}><StyledSettings/></StyledLink> 
-                    <DeleteRowBtn onClick={() => removeRow(id)} >X</DeleteRowBtn>
-                </Setting> */}
+                <SettingsLinks id={id} type={type} addColumn={this.addColumn.bind(this)} remove={removeRow}/>    
                 {this.state.columns}
             </RowWrapper>
         )

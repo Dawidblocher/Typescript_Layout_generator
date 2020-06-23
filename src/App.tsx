@@ -1,7 +1,7 @@
 import React from 'react';
 import './assets/App.css';
 import Page from './components/Page/Page';
-import Row from './components/Row/Row';
+
 
 import styled from 'styled-components';
 import {
@@ -14,6 +14,9 @@ import RowSetting from './components/SettingsView/RowSetting/RowSetting';
 import PageSettings from './components/SettingsView/PageSetting/PageSetting';
 import ColumnSettings from './components/SettingsView/ColumnSetting/ColumnSetting';
 import TitleSettings from './components/SettingsView/TitleSetting/TitleSetting';
+
+import {Provider} from 'react-redux';
+import store from './store';
 
 const StyledAside = styled.aside`
   position: absolute;
@@ -34,59 +37,9 @@ interface ITemplate {
 }
 
 class App extends React.Component<any, any> {
-   state = {
-    template: {
-      rows: [
-        {
-          id: 0,
-          col:[
-            {
-              id: 0,
-            },
-            {
-              id: 1,
-            },
-            {
-              id: 2,
-            }
-          ]
-        },
-        {
-          id: 1,
-          col:[
-            {
-              id: 0,
-            },
-            {
-              id: 1,
-            },
-            {
-              id: 2,
-            }
-          ]
-        }
-      ]
-    },
-   }
-
-   componentDidMount(){
-   }
-
-  //  renderTemplate(){
-  //   const template = this.state.template;
-  //   const row = template.rows.map((row, index) => <Row key={row.id}>{template.rows[index].col.map(col => (<Column key={col.id} />))}</Row>)
-  //   return row
-  //  }
-
-  //  createRow(id){
-  //    const template = this.state.template;
-  //    const newTemplate = {
-      
-  //    }
-  //  }
-
   render() {
     return (
+      <Provider store={store}>
       <Router>
           <StyledAside>
           <Switch>
@@ -99,14 +52,12 @@ class App extends React.Component<any, any> {
           </StyledAside>
           <AppWraper className="App">
               <Page id={1} type="page">
-                {/* {this.renderTemplate()} */}
-               
-                  
-              
               </Page>
               
           </AppWraper>
-      </Router>)
+      </Router>        
+      </Provider>
+      )
   }
 }
 

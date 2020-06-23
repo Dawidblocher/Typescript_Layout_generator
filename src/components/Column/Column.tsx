@@ -25,12 +25,13 @@ type IRow = {
     type: string,
     removeColumn: any,
     changeWidth: any,
+    elements: any,
 };
 
 class Column extends React.Component<IRow, any> {
     state = {
         onMove: false,
-        elements: [],
+        elements: this.props.elements,
         nextId: 0,
         width: 100,
     }
@@ -87,14 +88,7 @@ class Column extends React.Component<IRow, any> {
             <RowWrapper  className="column" style={{
                 width: this.state.width + "%",
             }}>
-                <SettingsLinksColumn id={id} type={type} remove={removeColumn} createTitleComponent={this.createTitleComponent}/>
-                {/* <Setting>
-                   <StyledLink to={{
-                        pathname: `/${type}settings/${id}`,
-                        addColumn: this.addColumn.bind(this)
-                    }}><StyledSettings/></StyledLink> 
-                    <DeleteRowBtn onClick={() => removeRow(id)} >X</DeleteRowBtn>
-                </Setting> */}
+                <SettingsLinksColumn id={id} type={type} remove={removeColumn} createTitleComponent={this.createTitleComponent}/>               
                 {this.state.elements}
                 <WidthControl className="width-control" onMouseDown={this.handleMosueDown}  onMouseMove={(e) => this.handleMoveMouse(e)}/>
             </RowWrapper>
